@@ -19,8 +19,6 @@ export class TodoListComponent implements OnInit {
   }
 
   deleteTodo(id: number): void {
-    this.apiService.deleteTodo(id).subscribe(() => {
-      console.log('delete request proccessed');
-    });
+    this.apiService.deleteTodo(id).subscribe(() => {});
   }
 }

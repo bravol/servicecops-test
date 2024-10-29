@@ -51,6 +51,7 @@ export class TodoFormComponent implements OnInit {
       if (id) {
         // Update todo
         todoData.id = id;
+        todoData.userId = this.todo.userId;
         this.apiService.updateTodo(todoData.id, todoData).subscribe(() => {
           this.router.navigate(['/todos']);
         });
