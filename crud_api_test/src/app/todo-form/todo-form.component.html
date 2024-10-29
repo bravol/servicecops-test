@@ -1,1 +1,13 @@
-<p>todo-form works!</p>
+<hr />
+<form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="title">Title</label>
+    <input type="text" formControlName="title" placeholder="Title" />
+    <div
+      *ngIf="todoForm.get('title')?.invalid && todoForm.get('title')?.touched"
+    >
+      Title is required
+    </div>
+  </div>
+  <button type="submit" [disabled]="todoForm.invalid">Submit</button>
+</form>
