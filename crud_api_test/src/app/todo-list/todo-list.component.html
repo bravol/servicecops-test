@@ -1,1 +1,43 @@
-<p>todo-list works!</p>
+<app-home></app-home>
+<hr />
+<h3 class="mt-5 mb-3">Todo List</h3>
+
+<table class="table table-hover table-vcenter text-nowrap">
+  <thead>
+    <tr>
+      <th>Todo Id</th>
+      <th>Title</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let todo of todos">
+      <td>{{ todo.id }}</td>
+      <td>{{ todo.title }}</td>
+
+      <td>
+        <button
+          class="btn btn-sm btn-success mx-1"
+          [routerLink]="['/todo', todo.id]"
+        >
+          View
+        </button>
+
+        <button
+          class="btn btn-sm btn-warning mx-1"
+          [routerLink]="['/edit', todo.id]"
+        >
+          Edit
+        </button>
+
+        <button
+          class="btn btn-sm btn-danger mx-1"
+          (click)="deleteTodo(todo.id)"
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

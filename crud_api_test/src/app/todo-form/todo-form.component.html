@@ -1,3 +1,5 @@
+<app-home></app-home>
+
 <hr />
 <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
   <div>
@@ -5,6 +7,7 @@
     <input type="text" formControlName="title" placeholder="Title" />
     <div
       *ngIf="todoForm.get('title')?.invalid && todoForm.get('title')?.touched"
+      class="error-message"
     >
       Title is required
     </div>

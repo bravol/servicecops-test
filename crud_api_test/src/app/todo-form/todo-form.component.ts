@@ -1,16 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from '../services/api.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Todo } from '../models/todo';
 
 @Component({
   selector: 'app-todo-form',
   templateUrl: './todo-form.component.html',
-  styleUrl: './todo-form.component.css',
+  styleUrls: ['./todo-form.component.css'],
 })
 export class TodoFormComponent implements OnInit {
   todoForm: FormGroup = new FormGroup({});
+  todo: Todo = { id: 0, title: '', completed: false };
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private apiService: ApiService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
     this.todoForm = this.formBuilder.group({
       title: [
         '',
@@ -21,13 +31,35 @@ export class TodoFormComponent implements OnInit {
         ],
       ],
     });
+
+    // Check if there's an 'id' in the route to distinguish between add and update
+    const id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+    if (id) {
+      // Update existing todo
+      this.apiService.getTodo(id).subscribe((todo) => {
+        this.todo = todo;
+        this.todoForm.patchValue(todo);
+      });
+    }
   }
-  ngOnInit(): void {}
 
   onSubmit() {
     if (this.todoForm.valid) {
-      console.log('hello');
-      this.todoForm.reset();
+      const todoData: Todo = this.todoForm.value;
+
+      const id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+      if (id) {
+        // Update todo
+        todoData.id = id;
+        this.apiService.updateTodo(todoData.id, todoData).subscribe(() => {
+          this.router.navigate(['/todos']);
+        });
+      } else {
+        // Add new todo
+        this.apiService.addTodo(todoData).subscribe(() => {
+          this.router.navigate(['/todos']);
+        });
+      }
     }
   }
 }

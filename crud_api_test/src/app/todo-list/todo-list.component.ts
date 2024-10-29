@@ -13,12 +13,12 @@ export class TodoListComponent implements OnInit {
   todos: Todo[] = [];
 
   ngOnInit(): void {
-    this.apiService.getTodos().subscribe((todos) => {
+    this.apiService.getTodos(5).subscribe((todos) => {
       this.todos = todos;
     });
   }
 
-  deleteReservation(id: string): void {
+  deleteTodo(id: number): void {
     this.apiService.deleteTodo(id).subscribe(() => {
       console.log('delete request proccessed');
     });

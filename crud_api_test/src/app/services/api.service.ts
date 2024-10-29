@@ -8,15 +8,15 @@ import { Todo } from '../models/todo';
   providedIn: 'root',
 })
 export class ApiService {
-  private apiUrl = environment.apiUrl + '/todos';
+  private apiUrl = environment.apiUrl + '/todos/';
 
   constructor(private http: HttpClient) {}
 
-  getTodos(): Observable<Todo[]> {
-    return this.http.get<Todo[]>(this.apiUrl);
+  getTodos(limit: number): Observable<Todo[]> {
+    return this.http.get<Todo[]>(`${this.apiUrl}?_limit=${limit}`);
   }
 
-  getTodo(id: string): Observable<Todo> {
+  getTodo(id: number): Observable<Todo> {
     return this.http.get<Todo>(this.apiUrl + id);
   }
 
@@ -24,11 +24,11 @@ export class ApiService {
     return this.http.post<Todo>(this.apiUrl, todo);
   }
 
-  deleteTodo(id: string): Observable<void> {
+  deleteTodo(id: number): Observable<void> {
     return this.http.delete<void>(this.apiUrl + id);
   }
 
-  updateTodo(id: String, todo: Todo): Observable<Todo> {
+  updateTodo(id: number, todo: Todo): Observable<Todo> {
     return this.http.put<Todo>(this.apiUrl + id, todo);
   }
 }

@@ -1,0 +1,16 @@
+<app-home></app-home>
+<hr />
+<div class="todo-container">
+  <div class="todo-card">
+    <p class="todo-label">Todo ID:</p>
+    <p class="todo-value">{{ todo.id }}</p>
+    <p class="todo-label">Title:</p>
+    <p class="todo-value">{{ todo.title }}</p>
+    <p class="todo-label">Completed:</p>
+    <p class="todo-value">
+      <span [class.completed]="todo.completed">{{
+        todo.completed ? "Yes" : "No"
+      }}</span>
+    </p>
+  </div>
+</div>
