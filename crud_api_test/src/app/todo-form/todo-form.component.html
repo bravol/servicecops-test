@@ -12,5 +12,15 @@
       Title is required
     </div>
   </div>
+
+  <!-- Only show the Completed checkbox in edit mode -->
+  <div class="form-check" *ngIf="isEditMode">
+    <input
+      class="form-check-input"
+      type="checkbox"
+      formControlName="completed"
+    />
+    <label class="form-check-label"> Completed </label>
+  </div>
   <button type="submit" [disabled]="todoForm.invalid">Submit</button>
 </form>

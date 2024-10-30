@@ -12,6 +12,7 @@ import { Todo } from '../models/todo';
 export class TodoFormComponent implements OnInit {
   todoForm: FormGroup = new FormGroup({});
   todo: Todo = { userId: 1, id: 0, title: '', completed: false };
+  isEditMode = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,11 +31,13 @@ export class TodoFormComponent implements OnInit {
           Validators.minLength(3),
         ],
       ],
+      completed: [false],
     });
 
     // Check if there's an 'id' in the route to distinguish between add and update
     const id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
     if (id) {
+      this.isEditMode = true;
       // Update existing todo
       this.apiService.getTodo(id).subscribe((todo) => {
         this.todo = todo;
@@ -47,7 +50,6 @@ export class TodoFormComponent implements OnInit {
     if (this.todoForm.valid) {
       const todoData: Todo = {
         ...this.todoForm.value,
-        completed: this.todo.completed || false,
         userId: 1,
       };
 

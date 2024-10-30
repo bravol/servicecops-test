@@ -30,6 +30,7 @@ export class ApiService {
   }
 
   updateTodo(id: number, todo: Todo): Observable<Todo> {
+    console.log('the updated todo is:', todo);
     return this.http.put<Todo>(this.apiUrl + id, todo);
   }
 }
