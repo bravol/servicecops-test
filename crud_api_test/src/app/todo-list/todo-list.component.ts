@@ -11,11 +11,13 @@ export class TodoListComponent implements OnInit {
   todos: Todo[] = [];
   currentPage = 1;
   itemsPerPage = 10;
+  loading = true;
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
     this.apiService.getTodos().subscribe((todos) => {
       this.todos = todos;
+      this.loading = false;
     });
   }
 

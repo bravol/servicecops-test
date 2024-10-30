@@ -7,10 +7,11 @@
     <p class="todo-label">Title:</p>
     <p class="todo-value">{{ todo.title }}</p>
     <p class="todo-label">Completed:</p>
-    <p class="todo-value">
-      <span [class.completed]="todo.completed">{{
-        todo.completed ? "Yes" : "No"
-      }}</span>
-    </p>
+    <input
+      class="form-check-input"
+      type="checkbox"
+      [checked]="todo.completed"
+      disabled
+    />
   </div>
 </div>
