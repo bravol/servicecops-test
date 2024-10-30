@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HomeModule } from '../home/home.module';
 import { SingleTodoComponent } from '../single-todo/single-todo.component';
+import { NgxPaginationModule } from 'ngx-pagination'; // Import here
 
 @NgModule({
   declarations: [TodoFormComponent, TodoListComponent, SingleTodoComponent],
@@ -15,6 +16,7 @@ import { SingleTodoComponent } from '../single-todo/single-todo.component';
     ReactiveFormsModule,
     RouterModule,
     HomeModule,
+    NgxPaginationModule,
   ],
 })
 export class TodosModule {}

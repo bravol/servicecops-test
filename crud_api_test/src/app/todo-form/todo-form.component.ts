@@ -11,7 +11,7 @@ import { Todo } from '../models/todo';
 })
 export class TodoFormComponent implements OnInit {
   todoForm: FormGroup = new FormGroup({});
-  todo: Todo = { id: 0, title: '', completed: false };
+  todo: Todo = { userId: 1, id: 0, title: '', completed: false };
 
   constructor(
     private formBuilder: FormBuilder,
@@ -45,7 +45,11 @@ export class TodoFormComponent implements OnInit {
 
   onSubmit() {
     if (this.todoForm.valid) {
-      const todoData: Todo = this.todoForm.value;
+      const todoData: Todo = {
+        ...this.todoForm.value,
+        completed: this.todo.completed || false,
+        userId: 1,
+      };
 
       const id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
       if (id) {
@@ -57,8 +61,11 @@ export class TodoFormComponent implements OnInit {
         });
       } else {
         // Add new todo
-        this.apiService.addTodo(todoData).subscribe(() => {
-          this.router.navigate(['/todos']);
+        this.apiService.getTodos().subscribe((todos) => {
+          todoData.id = Math.max(...todos.map((t) => t.id)) + 1;
+          this.apiService.addTodo(todoData).subscribe(() => {
+            this.router.navigate(['/todos']);
+          });
         });
       }
     }

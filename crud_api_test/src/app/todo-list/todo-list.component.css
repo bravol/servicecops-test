@@ -1,0 +1,13 @@
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination-controls .ng-star-inserted {
+  padding: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}

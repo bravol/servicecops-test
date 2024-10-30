@@ -12,7 +12,12 @@
   </thead>
 
   <tbody>
-    <tr *ngFor="let todo of todos">
+    <tr
+      *ngFor="
+        let todo of todos
+          | paginate : { itemsPerPage: itemsPerPage, currentPage: currentPage }
+      "
+    >
       <td>{{ todo.id }}</td>
       <td>{{ todo.title }}</td>
 
@@ -41,3 +46,13 @@
     </tr>
   </tbody>
 </table>
+
+<div class="d-flex justify-content-center my-3">
+  <pagination-controls
+    (pageChange)="currentPage = $event"
+    class="pagination justify-content-center"
+    [maxSize]="5"
+    [directionLinks]="true"
+    [autoHide]="true"
+  ></pagination-controls>
+</div>

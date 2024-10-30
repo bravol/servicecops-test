@@ -12,8 +12,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  getTodos(limit: number): Observable<Todo[]> {
-    return this.http.get<Todo[]>(`${this.apiUrl}?_limit=${limit}`);
+  getTodos(): Observable<Todo[]> {
+    return this.http.get<Todo[]>(this.apiUrl);
   }
 
   getTodo(id: number): Observable<Todo> {
@@ -21,6 +21,7 @@ export class ApiService {
   }
 
   addTodo(todo: Todo): Observable<Todo> {
+    console.log('the added todo is', todo);
     return this.http.post<Todo>(this.apiUrl, todo);
   }
 

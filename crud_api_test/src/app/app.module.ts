@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
 import { TodosModule } from './todos/todos.module';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [AppComponent],
@@ -14,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
     HomeModule,
     TodosModule,
     HttpClientModule,
+    NgxPaginationModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

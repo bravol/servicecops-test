@@ -9,7 +9,7 @@ import { Todo } from '../models/todo';
   styleUrl: './single-todo.component.css',
 })
 export class SingleTodoComponent {
-  todo: Todo = { id: 0, title: '', completed: false };
+  todo: Todo = { userId: 1, id: 0, title: '', completed: false };
 
   constructor(
     private apiService: ApiService,
