@@ -43,7 +43,7 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className=" bg-gray-50 w-full h-screen pt-10">
+    <div className=" bg-blue-500 w-full h-screen pt-10">
       <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md mt-10">
         <h2 className="text-2xl font-bold text-center">Sign Up</h2>
 
@@ -123,7 +123,7 @@ const SignUpPage = () => {
           </div>
           <button
             type="submit"
-            className="w-full p-2 bg-blue-500 text-white rounded-full hover:bg-purple-500 "
+            className="w-full p-2 bg-blue-500 text-white rounded-full hover:bg-blue-400 "
           >
             SignUp
           </button>
