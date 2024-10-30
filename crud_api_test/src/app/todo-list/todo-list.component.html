@@ -65,7 +65,7 @@
   </tbody>
 </table>
 
-<div class="d-flex justify-content-center my-3">
+<div class="d-flex justify-content-center my-3" *ngIf="!loading">
   <pagination-controls
     (pageChange)="currentPage = $event"
     class="pagination justify-content-center"
