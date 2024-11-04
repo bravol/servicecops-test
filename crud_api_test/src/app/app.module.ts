@@ -12,6 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { todoReducer } from './todo-store/todo.reducers';
 import { TodoEffects } from './todo-store/todo.effects';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,9 +24,11 @@ import { TodoEffects } from './todo-store/todo.effects';
     TodosModule,
     HttpClientModule,
     NgxPaginationModule,
+    MatSnackBarModule,
     StoreModule.forRoot<AppState>({ todo: todoReducer }),
     EffectsModule.forRoot([TodoEffects]),
     StoreDevtoolsModule.instrument(),
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

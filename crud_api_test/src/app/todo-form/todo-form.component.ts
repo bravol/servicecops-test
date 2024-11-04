@@ -6,6 +6,7 @@ import { Todo } from '../models/todo';
 import * as TodoActions from '../todo-store/todo.actions';
 import { selectTodos } from '../todo-store/todo.selectors';
 import { take } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-todo-form',
@@ -20,6 +21,7 @@ export class TodoFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private store: Store,
     private router: Router,
+    private snackbar: MatSnackBar,
     private activatedRoute: ActivatedRoute
   ) {
     this.todoForm = this.formBuilder.group({
@@ -69,13 +71,24 @@ export class TodoFormComponent implements OnInit {
         this.store.dispatch(
           TodoActions.updateTodo({ id: todoData.id, todo: todoData })
         );
+        this.openSnackBar('Todo updated successfully!'); // Notify user on edit
       } else {
         // Add new todo
         this.store.dispatch(TodoActions.addTodo({ todo: todoData }));
+        this.openSnackBar('Todo Added successfully!'); // Notify user on add
       }
 
       // Navigate back to the todos list after dispatching the action
       this.router.navigate(['/todos']);
     }
+  }
+
+  // Method to open Snackbar
+  openSnackBar(message: string, action: string = 'Close') {
+    this.snackbar.open(message, action, {
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+    });
   }
 }
