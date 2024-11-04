@@ -5,13 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppState } from './app.state';
 import { EffectsModule } from '@ngrx/effects';
-import { BookEffects } from './books/book.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HomeModule } from './home/home.module';
 import { TodosModule } from './todos/todos.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { todoReducer } from './todo-store/todo.reducers';
+import { TodoEffects } from './todo-store/todo.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +23,7 @@ import { todoReducer } from './todo-store/todo.reducers';
     HttpClientModule,
     NgxPaginationModule,
     StoreModule.forRoot<AppState>({ todo: todoReducer }),
-    EffectsModule.forRoot([BookEffects]),
+    EffectsModule.forRoot([TodoEffects]),
     StoreDevtoolsModule.instrument(),
   ],
   providers: [],
