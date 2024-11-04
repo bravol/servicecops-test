@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import { Environment } from "../env";
 import { Todo } from "./models";
 
-export class YassakoApiService {
+export class ApiService {
   //TODOS
   static async getTodos(token: string) {
     const response: AxiosResponse = await axios.get(
