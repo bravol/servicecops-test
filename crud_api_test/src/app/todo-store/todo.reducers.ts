@@ -20,12 +20,12 @@ export const todoReducer = createReducer(
   on(TodoActions.loadTodosSuccess, (state, { todos }) => ({
     ...state,
     todos,
-    loading: false,
+    loading: false, // Should set loading to false here
   })),
   on(TodoActions.loadTodosFailure, (state, { error }) => ({
     ...state,
     error,
-    loading: false,
+    loading: false, // Should set loading to false here
   })),
   on(TodoActions.addTodoSuccess, (state, { todo }) => ({
     ...state,

@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Todo } from '../models/todo';
 import * as TodoActions from '../todo-store/todo.actions';
-import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { selectTodos } from '../todo-store/todo.selectors';
 
@@ -79,16 +78,9 @@ export class TodoFormComponent implements OnInit {
         this.router.navigate(['/todos']);
       } else {
         // Add new todo
-        this.store
-          .select(selectTodos)
-          .pipe(
-            tap((todos) => {
-              todoData.id = Math.max(...todos.map((t) => t.id)) + 1;
-              this.store.dispatch(TodoActions.addTodo({ todo: todoData }));
-              this.router.navigate(['/todos']);
-            })
-          )
-          .subscribe();
+
+        this.store.dispatch(TodoActions.addTodo({ todo: todoData }));
+        this.router.navigate(['/todos']);
       }
     }
   }

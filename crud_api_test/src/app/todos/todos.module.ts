@@ -1,17 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TodoFormComponent } from '../todo-form/todo-form.component';
 import { TodoListComponent } from '../todo-list/todo-list.component';
+import { TodoFormComponent } from '../todo-form/todo-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HomeModule } from '../home/home.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { SingleTodoComponent } from '../single-todo/single-todo.component';
-import { NgxPaginationModule } from 'ngx-pagination'; // Import here
-import { EffectsModule } from '@ngrx/effects';
-import { TodoEffects } from '../todo-store/todo.effects';
 
 @NgModule({
-  declarations: [TodoFormComponent, TodoListComponent, SingleTodoComponent],
+  declarations: [TodoListComponent, TodoFormComponent, SingleTodoComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -19,7 +17,6 @@ import { TodoEffects } from '../todo-store/todo.effects';
     RouterModule,
     HomeModule,
     NgxPaginationModule,
-    EffectsModule.forRoot(TodoEffects),
   ],
 })
 export class TodosModule {}

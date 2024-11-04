@@ -6,12 +6,10 @@ describe('SingleTodoComponent', () => {
   let component: SingleTodoComponent;
   let fixture: ComponentFixture<SingleTodoComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       declarations: [SingleTodoComponent]
-    })
-    .compileComponents();
-
+    });
     fixture = TestBed.createComponent(SingleTodoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
