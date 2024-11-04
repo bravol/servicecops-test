@@ -23,11 +23,11 @@ export const TodoSlice = createSlice({
 
     updateTodo: (
       state,
-      action: PayloadAction<{ id: string; updates: Partial<Todo> }>
+      action: PayloadAction<{ id: number; updates: Partial<Todo> }>
     ) => {
       const { id, updates } = action.payload;
       state.todos = state.todos.map((todo) =>
-        todo.id?.toString() === id ? { ...todo, ...updates } : todo
+        todo.id === id ? { ...todo, ...updates } : todo
       );
     },
 

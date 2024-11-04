@@ -4,13 +4,12 @@ import { Todo } from "./models";
 
 export class ApiService {
   //TODOS
-  static async getTodos(token: string) {
+  static async getTodos() {
     const response: AxiosResponse = await axios.get(
       `${Environment.API_URL}/todos/`,
       {
         headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
+          "Content-type": "application/json; charset=UTF-8",
         },
       }
     );
