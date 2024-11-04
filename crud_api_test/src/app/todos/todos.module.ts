@@ -7,6 +7,8 @@ import { RouterModule } from '@angular/router';
 import { HomeModule } from '../home/home.module';
 import { SingleTodoComponent } from '../single-todo/single-todo.component';
 import { NgxPaginationModule } from 'ngx-pagination'; // Import here
+import { EffectsModule } from '@ngrx/effects';
+import { TodoEffects } from '../todo-store/todo.effects';
 
 @NgModule({
   declarations: [TodoFormComponent, TodoListComponent, SingleTodoComponent],
@@ -17,6 +19,7 @@ import { NgxPaginationModule } from 'ngx-pagination'; // Import here
     RouterModule,
     HomeModule,
     NgxPaginationModule,
+    EffectsModule.forRoot(TodoEffects),
   ],
 })
 export class TodosModule {}

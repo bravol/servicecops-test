@@ -3,7 +3,7 @@
 <h3 class="mt-5 mb-3">Todo List</h3>
 
 <!-- Loader -->
-<div *ngIf="loading" class="text-center my-5">
+<div *ngIf="loading$ | async" class="text-center my-5">
   <div class="spinner-border" role="status">
     <span class="visually-hidden">Loading...</span>
   </div>
@@ -11,7 +11,10 @@
 </div>
 
 <!-- table for todos -->
-<table class="table table-hover table-vcenter text-nowrap" *ngIf="!loading">
+<table
+  class="table table-hover table-vcenter text-nowrap"
+  *ngIf="!(loading$ | async)"
+>
   <thead>
     <tr>
       <th>Todo Id</th>
@@ -24,7 +27,7 @@
   <tbody>
     <tr
       *ngFor="
-        let todo of todos
+        let todo of (todos$ | async) || []
           | paginate : { itemsPerPage: itemsPerPage, currentPage: currentPage }
       "
     >
@@ -65,7 +68,7 @@
   </tbody>
 </table>
 
-<div class="d-flex justify-content-center my-3" *ngIf="!loading">
+<div class="d-flex justify-content-center my-3" *ngIf="!(loading$ | async)">
   <pagination-controls
     (pageChange)="currentPage = $event"
     class="pagination justify-content-center"

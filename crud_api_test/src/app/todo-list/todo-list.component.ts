@@ -1,29 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../services/api.service';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { Todo } from '../models/todo';
+import { selectTodos, selectLoading } from '../todo-store/todo.selectors'; // Include loading selector
+import { AppState } from '../app.state';
+import { deleteTodo, loadTodos } from '../todo-store/todo.actions';
 
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
-  styleUrl: './todo-list.component.css',
+  styleUrls: ['./todo-list.component.css'],
 })
 export class TodoListComponent implements OnInit {
-  todos: Todo[] = [];
+  todos$: Observable<Todo[]>;
+  loading$: Observable<boolean>; // Observable for loading state
   currentPage = 1;
   itemsPerPage = 10;
-  loading = true;
-  constructor(private apiService: ApiService) {}
+
+  constructor(private store: Store<AppState>) {
+    this.todos$ = store.select(selectTodos);
+    this.loading$ = store.select(selectLoading); // Get loading state as observable
+  }
 
   ngOnInit(): void {
-    this.apiService.getTodos().subscribe((todos) => {
-      this.todos = todos;
-      this.loading = false;
-    });
+    // Dispatch an action to load todos when the component initializes
+    this.store.dispatch(loadTodos());
   }
 
   deleteTodo(id: number): void {
-    this.apiService.deleteTodo(id).subscribe(() => {
-      this.todos = this.todos.filter((t) => t.id !== id);
-    });
+    // Dispatch an action to delete a todo
+    this.store.dispatch(deleteTodo({ id }));
   }
 }
